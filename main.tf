@@ -9,17 +9,17 @@ terraform {
 
 provider "google" {
   //credentials = file("<NAME>.json")
-  credentials = file("learn-gcp-323302-36fe78ab72ae.json")
+  credentials = file(var.credentials_file)
 
-  project = "learn-gcp-323302"
-  region  = "us-central1"
-  zone    = "us-central1-c"
+  project = var.project
+  region  = var.region
+  zone    = var.zone
 }
 
 resource "google_compute_network" "vpc_network" {
   name = "terraform-network"
 }
-resource "google_compute_instance" "vm_instance" {
+resource "google_compute_instance" "vm_instance_debian" {
   name         = "terraform-instance"
   machine_type = "f1-micro"
 
@@ -30,7 +30,6 @@ resource "google_compute_instance" "vm_instance" {
       image = "debian-cloud/debian-9"
     }
   }
-
   network_interface {
     network = google_compute_network.vpc_network.name
     access_config {}
