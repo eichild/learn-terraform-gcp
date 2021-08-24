@@ -4,4 +4,3 @@
 /terraform.tfstate.backup
 /terraform.tfstate
 /.terraform/
-/terraform.tfvars
